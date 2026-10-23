@@ -56,13 +56,13 @@ async function sendQuestion(event) {
   try {
     // 2. 履歴をまとめてサーバーに送る。
     // TODO: POSTで /api/chat に履歴を送る。下のコメントを外し、throw の行を消す。
-    // const response = await fetch('/api/chat', {
-      // method: 'POST',
-      // headers: {'Content-Type': 'application/json'},
-      // body: JSON.stringify({history: history})
-    // });
-    // const data = await response.json();
-    throw new Error('TODO: app.js の sendQuestion() で、サーバーへの送信を完成させる');
+  const response = await fetch('/api/chat', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({history: history})
+  });
+  const data = await response.json();
+    //throw new Error('TODO: app.js の sendQuestion() で、サーバーへの送信を完成させる');
 
     if (!response.ok) {
       // サーバーが返したエラーの説明を表示する。
@@ -70,7 +70,7 @@ async function sendQuestion(event) {
       if (typeof data.detail === 'string') {
         message = data.detail;
       }
-      throw new Error(message);
+      //throw new Error(message);
     }
 
     // 3. LLMの回答も履歴に追加する。次の質問のときに一緒に送られる。
